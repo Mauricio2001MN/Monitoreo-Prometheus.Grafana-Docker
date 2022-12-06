@@ -1,0 +1,20 @@
+version: '3.3'
+services:
+    speedtest:
+        container_name: speedtest
+        image: henrywhitaker3/speedtest-tracker
+        ports:
+            - 8765:80
+        volumes:
+            - /path/to/data:/config
+        environment:
+            - TZ=
+            - PGID=
+            - PUID=
+            - OOKLA_EULA_GDPR=true
+        logging:
+            driver: "json-file"
+            options:
+                max-file: "10"
+                max-size: "200k"
+        restart: unless-stopped

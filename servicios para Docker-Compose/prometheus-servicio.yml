@@ -1,0 +1,15 @@
+version: '3'
+
+prometheus:
+    image: prom/prometheus:latest # Se empleará la última versión de la imagen de Prometheus.
+    container_name: prometheus_serviem # Lo nombro con el nombre de la empresa.
+    ports:
+    - "9090:9090" # El servicio se ejecutará en los puertos 9090:9090
+    volumes:
+      - /etc/prometheus:/config
+      - prometheus-data:/prometheus
+      # Se crean estos volúmenes para tener un archivo de configuración donde ajustar
+      # los objetivos con los que Prometheus debe establecer conexión y recopilar las métricas.
+    restart: unless-stopped
+    command:
+      - "--config.file=/config/prometheus.yml"
